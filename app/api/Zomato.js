@@ -6,15 +6,17 @@ class Zomato {
     // TODO: load key from a .env
     this.apiKey = '4ded29a4fc887490fefc33a94bd72d02'
     this.baseUrl = 'https://developers.zomato.com/api/v2.1/'
+    this.cityId = 297
   }
 
-  get(endpoint) {
+  get(endpoint, params = {}) {
     const headers = {
       'user-key': this.apiKey,
     }
 
     return axios.get(`${this.baseUrl}${endpoint}`, {
       headers,
+      params,
     })
   }
 
@@ -24,7 +26,9 @@ class Zomato {
   }
   
   getCuisines() {
-    return this.get('cuisines')
+    return this.get('cuisines', {
+      city_id: this.cityId,
+    })
   }
 }
 
