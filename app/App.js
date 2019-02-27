@@ -12,7 +12,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //
+    this.setState({
+      categories: [
+        { categories: { name: 'Test', id: 3 } },
+        { categories: { name: 'Example', id: 5 } },
+      ]
+    })
+  }
+
+  categoryList() {
+    return this.state.categories.map(function(cat){
+      return <li key={'category-' + cat.categories.id}>{cat.categories.name}</li>;
+    })
   }
 
   render() {
@@ -23,7 +34,7 @@ class App extends Component {
               <div className="column is-two-thirds">
                 <div className="filter filter--category">
                   <h2 className="filter__heading">Category</h2>
-                  <ul className="filter__listing"></ul>
+                  <ul className="filter__listing">{ this.categoryList() }</ul>
                 </div>
                 <div className="filter filter--cuisine">
                   <h2 className="filter__heading">Cuisine</h2>
