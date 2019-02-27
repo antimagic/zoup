@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
+import NProgress from 'nprogress'
 import Zomato from '../api/Zomato'
 
 class Filters extends Component {
@@ -20,16 +21,29 @@ class Filters extends Component {
   }
 
   componentDidMount() {
+    NProgress.start()
+
     // grab the categories and populate the state
     Zomato.getCategories().then((res) => {
       console.log(res.data.categories)
       this.setState({ categories: res.data.categories })
+      this.updateLoadingBar()
     })
 
     Zomato.getCuisines().then((res) => {
       console.log(res.data.cuisines)
       this.setState({ cuisines: res.data.cuisines })
+      this.updateLoadingBar()
     })
+  }
+
+  updateLoadingBar() {
+    if (this.state.categories.length > 0 && this.state.cuisines.length > 0) {
+      NProgress.done()
+      return
+    }
+
+    NProgress.set(0.5)
   }
 
   // map category API output to label/value for multiselect
