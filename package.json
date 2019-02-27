@@ -13,6 +13,7 @@
     "axios": "^0.18.0",
     "bulma": "^0.7.4",
     "include-media": "^1.4.9",
+    "jump.js": "^1.0.2",
     "nprogress": "^0.2.0",
     "rc-slider": "^8.6.6",
     "react": "^16.8.3",

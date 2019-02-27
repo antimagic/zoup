@@ -73,6 +73,10 @@
     padding: 40px;
   }
 
+  &__wrapper.empty {
+    padding: 0;
+  }
+
   &__image-wrapper {
     padding-bottom: 0;
   }

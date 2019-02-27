@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NProgress from 'nprogress'
+import jump from 'jump.js'
 import Filters from './components/Filters'
 import RestaurantListing from './components/RestaurantListing'
 import Zomato from './api/Zomato'
@@ -41,6 +42,7 @@ class App extends Component {
     this.setState({
       filters: e,
       isSearching: true,
+      selected: null,
     })
 
     Zomato.getRestaurants(e).then((res) => {
@@ -68,6 +70,13 @@ class App extends Component {
     this.setState({
       selected: selection,
     })
+
+    // when stacked, bring the user down to their selection
+    if (document.documentElement.clientWidth < 769) {
+      jump('.selected__wrapper', {
+        duration: 300,
+      })
+    }
   }
   
   render() {
@@ -83,8 +92,8 @@ class App extends Component {
             <ul className="results__listing">{this.formattedResults()}</ul>
           </div>
 
-          {selected !== null && (
-          <div className="column selected__wrapper">
+          <div className={'column selected__wrapper' + (selected !== null ? ' active' : ' empty')}>
+            {selected !== null && (
             <div className="selected">
               <div className="columns is-desktop">
                 <div className="column selected__image-wrapper">
@@ -115,8 +124,8 @@ class App extends Component {
                 </div>
               </div>
             </div>
+            )}
           </div>
-          )}
         </section>
       </div>
     )
