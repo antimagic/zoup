@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import NProgress from 'nprogress'
 import Filters from './components/Filters'
 import RestaurantListing from './components/RestaurantListing'
 import Zomato from './api/Zomato'
@@ -18,23 +19,27 @@ class App extends Component {
   // when the filters change, query the Zomato API and update
   // the results listing.
   onFilterChange(e) {
+    NProgress.start()
+
     this.setState({ filters: e })
     Zomato.getRestaurants(e).then((res) => {
-      console.log(res)
       this.setState({ results: res.data.restaurants })
+      NProgress.done()
     })
   }
-
-  onResultSelected(selection) {
-    console.log(selection)
-  }
-
+  
+  // builds a list of RestaurantListing components using the current search results
   formattedResults() {
     return this.state.results.map((res) => {
       return <RestaurantListing key={'res.restaurant.id' + res.restaurant.id} id={res.restaurant.id} name={res.restaurant.name} onSelected={this.onResultSelected} />;
     })
   }
 
+  // populate the details view with content from the current selection
+  onResultSelected(selection) {
+    console.log(selection)
+  }
+  
   render() {
     return (
       <div className="zoup">

@@ -7,9 +7,11 @@ class RestaurantListing extends Component {
     this.onClick = this.onClick.bind(this)
   }
   
-  // 
   onClick(e) {
+    // prevent scroll position jumping
     e.preventDefault()
+    
+    // emit selection event when this listing's clicked and pass the id through
     this.props.onSelected(this.props.id)
   }
 
