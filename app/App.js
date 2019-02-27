@@ -29,7 +29,8 @@ class App extends Component {
       return 'Results'
     }
 
-    if (Object.keys(this.state.filters).length === 0) {
+    if (Object.keys(this.state.filters).length === 0 ||
+        (this.state.filters.categories.length === 0 && this.state.filters.cuisines.length === 0)) {
       return 'No filters selected'
     }
 
@@ -39,6 +40,16 @@ class App extends Component {
   // when the filters change, query the Zomato API and update
   // the results listing.
   onFilterChange(e) {
+    // if there's no categories or cuisines selected, reset to an empty state
+    if (e.categories.length === 0 && e.cuisines.length === 0) {
+      this.setState({
+        filters: e,
+        results: [],
+        selected: null,
+      })
+      return;
+    }
+
     NProgress.start()
     this.setState({
       filters: e,
