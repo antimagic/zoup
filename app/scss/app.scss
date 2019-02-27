@@ -1,2 +1,59 @@
+// variables
+$breakpoints: (
+  'xs': 320px,
+  'sm': 769px,
+  'md': 1024px,
+  'lg': 1216px,
+  'xl': 1408px
+);
+
+// deps
 @import '~bulma/css/bulma.css';
 @import '~nprogress/nprogress.css';
+@import '~include-media/dist/include-media';
+
+// layout
+body {
+  font-family: 'Open Sans';
+  font-size: 14px;
+}
+
+h3 {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.filters {
+  padding: 10px;
+  margin: 0;
+}
+
+.filter {
+  &__listing {
+    margin-bottom: 20px;
+  }
+  
+  &:last-child &__listing {
+    margin-bottom: 0;
+
+    @include media('>=sm') {
+      margin-bottom: 20px;
+    }
+  }
+
+}
+
+.content {
+  &__wrapper {
+    background-color: #f1f1f1;
+  }
+}
+
+.results {
+  background-color: #e5e5e5;
+  padding: 20px;
+}
+
+// 
