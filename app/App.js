@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Filters from './components/Filters'
+import RestaurantListing from './components/RestaurantListing'
 import Zomato from './api/Zomato'
 
 class App extends Component {
@@ -24,9 +25,13 @@ class App extends Component {
     })
   }
 
+  onResultSelected(selection) {
+    console.log(selection)
+  }
+
   formattedResults() {
     return this.state.results.map((res) => {
-      return <li key={'restaurant-' + res.restaurant.id}>{res.restaurant.name}</li>;
+      return <RestaurantListing key={'res.restaurant.id' + res.restaurant.id} id={res.restaurant.id} name={res.restaurant.name} onSelected={this.onResultSelected} />;
     })
   }
 
