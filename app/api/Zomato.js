@@ -10,6 +10,7 @@ class Zomato {
     this.cityId = 297
   }
 
+  // wrapper for axios get calls for cleanliness
   get(endpoint, params = {}) {
     const headers = {
       'user-key': this.apiKey,
