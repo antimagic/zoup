@@ -5,8 +5,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      categories: [],
-      cuisines: [],
+      filters: [],
       results: [],
       selected: null,
     }

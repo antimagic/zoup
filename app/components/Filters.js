@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Zomato from '../api/zomato'
+import Zomato from '../api/Zomato'
 
 class Filters extends Component {
   constructor(props) {
@@ -18,9 +18,12 @@ class Filters extends Component {
     // grab the categories and populate the state
     Zomato.getCategories().then((res) => {
       console.log(res.data.categories)
-      this.setState({
-        categories: res.data.categories
-      })
+      this.setState({ categories: res.data.categories })
+    })
+
+    Zomato.getCuisines().then((res) => {
+      console.log(res.data.cuisines)
+      this.setState({ cuisines: res.data.cuisines })
     })
   }
 
@@ -29,6 +32,13 @@ class Filters extends Component {
   categoryList() {
     return this.state.categories.map((cat) => {
       return <li key={'category-' + cat.categories.id}>{cat.categories.name}</li>;
+    })
+  }
+
+  cuisinesList() {
+    return this.state.cuisines.map((res) => {
+      const cuisine = res.cuisine
+      return <li key={'cuisine-' + cuisine.cuisine_id}>{cuisine.cuisine_name}</li>
     })
   }
 
@@ -46,7 +56,7 @@ class Filters extends Component {
           </div>
           <div className="filter filter--cuisine">
             <h2 className="filter__heading">Cuisine</h2>
-            <ul className="filter__listing"></ul>
+            <ul className="filter__listing">{ this.cuisinesList() }</ul>
           </div>
         </div>
 
