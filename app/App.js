@@ -8,24 +8,47 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      filters: [],
+      filters: {},
       results: [],
       selected: null,
+      isSearching: false,
     }
 
     this.onFilterChange = this.onFilterChange.bind(this)
     this.onResultSelected = this.onResultSelected.bind(this)
   }
 
+  getResultsHeading() {
+    if (this.state.isSearching) {
+      return 'Searching...'
+    }
+
+    if (this.state.results.length > 0) {
+      return 'Results'
+    }
+
+    if (Object.keys(this.state.filters).length === 0) {
+      return 'No filters selected'
+    }
+
+    return 'No results'
+  }
+
   // when the filters change, query the Zomato API and update
   // the results listing.
   onFilterChange(e) {
     NProgress.start()
+    this.setState({
+      filters: e,
+      isSearching: true,
+    })
 
-    this.setState({ filters: e })
     Zomato.getRestaurants(e).then((res) => {
       this.setState({ results: res.data.restaurants })
       NProgress.done()
+      this.setState({
+        isSearching: false,
+      })
     })
   }
   
@@ -45,7 +68,7 @@ class App extends Component {
   
   render() {
     const selected = this.state.selected
-    
+
     return (
       <div className="zoup">
         <div className="container">
@@ -55,6 +78,7 @@ class App extends Component {
         <section className="content__wrapper">
           <div className="container">
             <div className="results">
+              <h3 className="results__heading">{this.getResultsHeading()}</h3>
               <ul className="results__listing">{this.formattedResults()}</ul>
             </div>
             <div className="selected__wrapper">
