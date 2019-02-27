@@ -9,6 +9,11 @@
 .results {
   background-color: #e5e5e5;
   padding: 20px 0;
+  
+  @include media(">=sm") {
+    overflow-y: auto;
+    max-height: 800px;
+  }
 
   &__heading {
     padding: 0 20px;
