@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Select from 'react-select'
 import Zomato from '../api/Zomato'
 
 class Filters extends Component {
@@ -27,23 +28,34 @@ class Filters extends Component {
     })
   }
 
-  // render each category in the state as a <li> element
-  // using 'category-{id}' as the key and the name as the element content
-  categoryList() {
-    return this.state.categories.map((cat) => {
-      return <li key={'category-' + cat.categories.id}>{cat.categories.name}</li>;
+  // map category API output to label/value for multiselect
+  categoryOptions() {
+    return this.state.categories.map((res) => {
+      const category = res.categories
+      return {
+        label: category.name,
+        value: category.id,
+      }
     })
   }
-
-  cuisinesList() {
+  
+  // map cuisine API output to label/value for multiselect
+  cuisineOptions() {
     return this.state.cuisines.map((res) => {
       const cuisine = res.cuisine
-      return <li key={'cuisine-' + cuisine.cuisine_id}>{cuisine.cuisine_name}</li>
+      return {
+        label: cuisine.cuisine_name,
+        value: cuisine.cuisine_id,
+      }
     })
   }
 
   onChange(e) {
     this.props.onChange(e.target)
+  }
+
+  onCuisineChange(options, action) {
+    console.log(options)
   }
 
   render() {
@@ -52,11 +64,15 @@ class Filters extends Component {
         <div className="column is-two-thirds">
           <div className="filter filter--category">
             <h2 className="filter__heading">Category</h2>
-            <ul className="filter__listing">{ this.categoryList() }</ul>
+            <div className="filter__listing">
+              <Select isMulti name="categories" options={this.categoryOptions()} onChange={this.onCuisineChange} />
+            </div>
           </div>
           <div className="filter filter--cuisine">
             <h2 className="filter__heading">Cuisine</h2>
-            <ul className="filter__listing">{ this.cuisinesList() }</ul>
+            <div className="filter__listing">
+              <Select isMulti name="cuisines" options={this.cuisineOptions()} onChange={this.onCuisineChange} />
+            </div>
           </div>
         </div>
 
