@@ -16,3 +16,47 @@
     }
   }
 }
+
+.range-filter {
+  &__wrapper {
+    margin: 0 5px 40px;
+  }
+}
+
+.rc-slider-rail, .rc-slider-track {
+  height: 13px;
+}
+
+.rc-slider-rail {
+  background-color: #f1f1f1;
+}
+
+.rc-slider-track {
+  background-color: $link-colour;
+}
+
+.rc-slider-step {
+  display: none;
+}
+
+.rc-slider-handle {
+  border-color: $link-colour;
+  width: 21px;
+  height: 21px;
+  margin-left: -10px;
+  margin-top: -4px;
+}
+
+.rc-slider-mark {
+  top: 22px;
+}
+
+.rc-slider-mark-text {
+  &:first-child {
+    transform: none !important;
+  }
+
+  .filter--cost &:last-child {
+    transform: translateX(-70%) !important;
+  }
+}
