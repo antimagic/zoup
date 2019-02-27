@@ -44,7 +44,7 @@ class App extends Component {
     })
 
     Zomato.getRestaurants(e).then((res) => {
-      this.setState({ results: res.data.restaurants })
+      this.setState({ results: res })
       NProgress.done()
       this.setState({
         isSearching: false,

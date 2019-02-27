@@ -26,18 +26,42 @@ class Zomato {
     return this.get('categories')
   }
   
+  // a complete list of cuisines available within a city via /cuisines endpoint
   getCuisines() {
     return this.get('cuisines', {
       city_id: this.cityId,
     })
   }
 
+  // retrieve list of restaurants against a supplied filter query
   getRestaurants(filters) {
     return this.get('search', {
       entity_id: this.cityId,
       entity_type: 'city',
       category: filters.categories.join(','),
       cuisines: filters.cuisines.join(','),
+    }).then((res) => {
+      // since the API won't let us filter by rating or cost,
+      // process the list after the fact.
+      // TODO: we could store the master list and if only the sliders change,
+      // just filter it again - we don't need to make an api call since this
+      // filter takes place on our end
+      let filtered = res.data.restaurants.filter((r) => {
+        const targetRating = filters.rating
+        const rating = Math.round(r.restaurant.user_rating.aggregate_rating)
+        const ratingMatches = rating >= targetRating[0] && rating <= targetRating[1]
+
+        const targetCost = filters.cost
+        const cost = r.restaurant.price_range
+        const costMatches = cost >= targetCost[0] && cost <= targetCost[1]
+
+        if (ratingMatches && costMatches) {
+          return true;
+        }
+
+        return false;
+      })
+      return filtered
     })
   }
 
