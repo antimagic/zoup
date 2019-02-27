@@ -40,6 +40,12 @@ class Zomato {
       cuisines: filters.cuisines.join(','),
     })
   }
+
+  getRestaurant(id) {
+    return this.get('restaurant', {
+      res_id: id,
+    })
+  }
 }
 
 export default new Zomato

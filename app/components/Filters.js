@@ -80,13 +80,13 @@ class Filters extends Component {
       <div className="columns filters">
         <div className="column is-two-thirds">
           <div className="filter filter--category">
-            <h2 className="filter__heading">Category</h2>
+            <h3 className="filter__heading">Category</h3>
             <div className="filter__listing">
               <Select isMulti name="categories" options={this.categoryOptions()} onChange={this.onChange} />
             </div>
           </div>
           <div className="filter filter--cuisine">
-            <h2 className="filter__heading">Cuisine</h2>
+            <h3 className="filter__heading">Cuisine</h3>
             <div className="filter__listing">
               <Select isMulti name="cuisines" options={this.cuisineOptions()} onChange={this.onChange} />
             </div>
@@ -95,10 +95,10 @@ class Filters extends Component {
 
         <div className="column">
           <div className="filter filter--rating">
-            <h2 className="filter__heading">Rating</h2>
+            <h3 className="filter__heading">Rating</h3>
           </div>
           <div className="filter filter--cost">
-            <h2 className="filter__heading">Cost</h2>
+            <h3 className="filter__heading">Cost</h3>
           </div>
         </div>
       </div>
