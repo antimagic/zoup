@@ -1,11 +1,13 @@
 // variables
 $breakpoints: (
-  'xs': 320px,
-  'sm': 769px,
-  'md': 1024px,
-  'lg': 1216px,
-  'xl': 1408px
+  "xs": 320px,
+  "sm": 769px,
+  "md": 1024px,
+  "lg": 1216px,
+  "xl": 1408px
 );
+$item-border: #b2b6b7;
+$link-colour: #50bebf;
 
 // deps
 @import '~bulma/css/bulma.css';
@@ -38,7 +40,7 @@ h3 {
   &:last-child &__listing {
     margin-bottom: 0;
 
-    @include media('>=sm') {
+    @include media(">=sm") {
       margin-bottom: 20px;
     }
   }
@@ -59,7 +61,26 @@ h3 {
     margin-bottom: 0;
   }
 
-  &__listing li a {
-    padding: 20px;
+  &__item:first-child {
+    margin-top: 15px;
+    border-top: 1px solid #b2b6b7;
+  }
+
+  &__item a {
+    padding: 10px 20px;
+    display: block;
+    border-bottom: 1px solid #b2b6b7;
+    color: #4e5456;
+    transition: color 0.2s, background-color 0.2s;
+
+    @include media(">=md") {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    &.is-selected {
+      color: #fff;
+      background-color: $link-colour;
+    }
   }
 }

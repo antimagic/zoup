@@ -17,7 +17,7 @@ class RestaurantListing extends Component {
 
   render() {
     return (
-      <li><a href="#" onClick={this.onClick}>{this.props.data.name}</a></li>
+      <li className="results__item"><a className={this.props.isSelected ? 'is-selected' : ''} href="#" onClick={this.onClick}>{this.props.data.name}</a></li>
     )
   }
 }
