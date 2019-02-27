@@ -11,7 +11,7 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.react('app/index.js', 'dist/').sass('app/scss/app.scss', 'dist/')
+mix.react('app/index.js', 'dist/').sass('assets/scss/app.scss', 'dist/')
    .options({
      processCssUrls: false,
    });
