@@ -32,6 +32,19 @@
       padding-bottom: 15px;
     }
 
+    span {
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+
+    &:hover, &:focus {
+      background-color: #ddd;
+
+      span {
+        transform: translateX(5px);
+      }
+    }
+
     &.is-selected {
       color: #fff;
       background-color: $link-colour;
@@ -42,6 +55,18 @@
 .selected {
   padding: 5px;
   font-size: 1rem;
+
+  @include media(">=sm") {
+    padding: 15px;
+  }
+
+  @include media(">=md") {
+    padding: 30px;
+  }
+
+  @include media(">=lg") {
+    padding: 40px;
+  }
 
   &__image-wrapper {
     padding-bottom: 0;

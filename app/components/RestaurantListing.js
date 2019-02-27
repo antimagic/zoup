@@ -17,7 +17,11 @@ class RestaurantListing extends Component {
 
   render() {
     return (
-      <li className="results__item"><a className={this.props.isSelected ? 'is-selected' : ''} href="#" onClick={this.onClick}>{this.props.data.name}</a></li>
+      <li className="results__item">
+        <a className={this.props.isSelected ? 'is-selected' : ''} href="#" onClick={this.onClick}>
+          <span>{this.props.data.name}</span>
+        </a>
+      </li>
     )
   }
 }
