@@ -1,6 +1,21 @@
 body {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', Helvetica, Arial;
   font-size: 14px;
+}
+
+a {
+  color: $link-colour;
+}
+
+h2 {
+  font-family: 'Lato', Helvetica, Arial;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1.2;
+
+  @include media(">=md") {
+    font-size: 2.25em;
+  }
 }
 
 h3 {
