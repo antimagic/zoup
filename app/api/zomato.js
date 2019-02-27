@@ -8,15 +8,23 @@ class Zomato {
     this.baseUrl = 'https://developers.zomato.com/api/v2.1/'
   }
 
-  // returns a complete list of categories from Zomato's /categories endpoint
-  getCategories() {
+  get(endpoint) {
     const headers = {
       'user-key': this.apiKey,
     }
 
-    return axios.get(`${this.baseUrl}categories`, {
+    return axios.get(`${this.baseUrl}${endpoint}`, {
       headers,
     })
+  }
+
+  // returns a complete list of categories from Zomato's /categories endpoint
+  getCategories() {
+    return this.get('categories')
+  }
+  
+  getCuisines() {
+    return this.get('cuisines')
   }
 }
 
