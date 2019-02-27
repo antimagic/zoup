@@ -10,13 +10,13 @@ class Filters extends Component {
       cuisines: [],
       rating: [0, 5],
       cost: [1, 4],
-      selectedCategories: [],
-      selectedCuisines: [],
+      selected: {
+        categories: [],
+        cuisines: [],
+      },
     }
 
     this.onChange = this.onChange.bind(this)
-    this.onCategoriesChange = this.onCategoriesChange.bind(this)
-    this.onCuisinesChange = this.onCuisinesChange.bind(this)
   }
 
   componentDidMount() {
@@ -55,32 +55,12 @@ class Filters extends Component {
   }
 
   // emit a change event including the current filter state
-  onChange() {
-    this.props.onChange({
-      categories: this.state.selectedCategories,
-      cuisines: this.state.selectedCuisines,
-      rating: this.state.rating,
-      cost: this.state.cost,
-    })
-  }
-
-  // update state with the selected categories
-  onCategoriesChange(options, action) {
-    this.state.selectedCategories = options.map((res) => {
+  onChange(options, action) {
+    this.state.selected[action.name] = options.map((res) => {
       return res.value
     })
-    
-    this.onChange()
-  }
 
-  // update state with the selected cuisines
-  // TODO: dry this up so we don't need multiple input change events
-  onCuisinesChange(options, action) {
-    this.state.selectedCuisines = options.map((res) => {
-      return res.value
-    })
-    
-    this.onChange()
+    this.props.onChange(this.state.selected)
   }
 
   render() {
@@ -90,13 +70,13 @@ class Filters extends Component {
           <div className="filter filter--category">
             <h2 className="filter__heading">Category</h2>
             <div className="filter__listing">
-              <Select isMulti name="categories" options={this.categoryOptions()} onChange={this.onCategoriesChange} />
+              <Select isMulti name="categories" options={this.categoryOptions()} onChange={this.onChange} />
             </div>
           </div>
           <div className="filter filter--cuisine">
             <h2 className="filter__heading">Cuisine</h2>
             <div className="filter__listing">
-              <Select isMulti name="cuisines" options={this.cuisineOptions()} onChange={this.onCuisinesChange} />
+              <Select isMulti name="cuisines" options={this.cuisineOptions()} onChange={this.onChange} />
             </div>
           </div>
         </div>
