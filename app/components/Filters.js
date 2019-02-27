@@ -25,13 +25,11 @@ class Filters extends Component {
 
     // grab the categories and populate the state
     Zomato.getCategories().then((res) => {
-      console.log(res.data.categories)
       this.setState({ categories: res.data.categories })
       this.updateLoadingBar()
     })
 
     Zomato.getCuisines().then((res) => {
-      console.log(res.data.cuisines)
       this.setState({ cuisines: res.data.cuisines })
       this.updateLoadingBar()
     })

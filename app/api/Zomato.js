@@ -31,6 +31,15 @@ class Zomato {
       city_id: this.cityId,
     })
   }
+
+  getRestaurants(filters) {
+    return this.get('search', {
+      entity_id: this.cityId,
+      entity_type: 'city',
+      category: filters.categories.join(','),
+      cuisines: filters.cuisines.join(','),
+    })
+  }
 }
 
 export default new Zomato
