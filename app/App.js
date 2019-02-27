@@ -20,23 +20,6 @@ class App extends Component {
     this.onResultSelected = this.onResultSelected.bind(this)
   }
 
-  getResultsHeading() {
-    if (this.state.isSearching) {
-      return 'Searching...'
-    }
-
-    if (this.state.results.length > 0) {
-      return 'Results'
-    }
-
-    if (Object.keys(this.state.filters).length === 0 ||
-        (this.state.filters.categories.length === 0 && this.state.filters.cuisines.length === 0)) {
-      return 'No filters selected'
-    }
-
-    return 'No results'
-  }
-
   // when the filters change, query the Zomato API and update
   // the results listing.
   onFilterChange(e) {
@@ -57,6 +40,8 @@ class App extends Component {
       selected: null,
     })
 
+    // TODO: this only grabs the first page of 20 results. ideally there'd
+    // be a Load More button at the end of the results to grab the next page.
     Zomato.getRestaurants(e).then((res) => {
       this.setState({ results: res })
       NProgress.done()
@@ -89,6 +74,25 @@ class App extends Component {
         duration: 300,
       })
     }
+  }
+
+  // display different headings above the results listing
+  // depending on the app state
+  getResultsHeading() {
+    if (this.state.isSearching) {
+      return 'Searching...'
+    }
+
+    if (this.state.results.length > 0) {
+      return 'Results'
+    }
+
+    if (Object.keys(this.state.filters).length === 0 ||
+        (this.state.filters.categories.length === 0 && this.state.filters.cuisines.length === 0)) {
+      return 'No filters selected'
+    }
+
+    return 'No results'
   }
   
   render() {
