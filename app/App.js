@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Zomato from './api/zomato'
 
 class App extends Component {
   constructor() {
@@ -12,16 +13,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      categories: [
-        { categories: { name: 'Test', id: 3 } },
-        { categories: { name: 'Example', id: 5 } },
-      ]
+    // grab the categories and populate the state
+    Zomato.getCategories().then((res) => {
+      console.log(res.data.categories)
+      this.setState({
+        categories: res.data.categories
+      })
     })
   }
 
+  // render each category in the state as a <li> element
+  // using 'category-{id}' as the key and the name as the element content
   categoryList() {
-    return this.state.categories.map(function(cat){
+    return this.state.categories.map((cat) => {
       return <li key={'category-' + cat.categories.id}>{cat.categories.name}</li>;
     })
   }
