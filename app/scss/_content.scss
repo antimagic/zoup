@@ -1,0 +1,40 @@
+.content {
+  &__wrapper {
+    background-color: #f1f1f1;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.results {
+  background-color: #e5e5e5;
+  padding: 20px 0;
+
+  &__heading {
+    padding: 0 20px;
+    margin-bottom: 0;
+  }
+
+  &__item:first-child {
+    margin-top: 15px;
+    border-top: 1px solid #b2b6b7;
+  }
+
+  &__item a {
+    padding: 10px 20px;
+    display: block;
+    border-bottom: 1px solid #b2b6b7;
+    color: #4e5456;
+    transition: color 0.2s, background-color 0.2s;
+
+    @include media(">=md") {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    &.is-selected {
+      color: #fff;
+      background-color: $link-colour;
+    }
+  }
+}
