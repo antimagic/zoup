@@ -11,6 +11,7 @@
   "author": "James Firkins",
   "dependencies": {
     "axios": "^0.18.0",
+    "bulma": "^0.7.4",
     "react": "^16.8.3",
     "react-dom": "^16.8.3"
   },
